@@ -81,10 +81,10 @@ print("Best estimate", y_be, u_y_be)
 
 # Plot the characteristic limits
 
-fig, ax = plt.subplots(2, 1, figsize=(88/inch_to_mm, 90/inch_to_mm), sharex=True)
+fig, ax = plt.subplots(2, 1, figsize=(83/inch_to_mm, 90/inch_to_mm), sharex=True)
 
 # Make histograms
-histo_range = [-0.5, 1.2]
+histo_range = [-0.4, 1.3]
 histo_bins = 200
 
 y_histo, ex_y = np.histogram(y_samples, bins=histo_bins, range=histo_range)
@@ -116,22 +116,26 @@ ax[1].axvline(x=y_ast, ymax=1, color=colors[2], ls='--', label=r"$y^\ast$")
 horizonal_value_at_y_ast = np.interp(y_ast, ex_y_ast[:-1], y_ast_histo_norm)
 horizonal_values = np.append(y_ast, ex_y_ast[:-1][ex_y_ast[:-1] >= y_ast])
 vertical_values = np.append(horizonal_value_at_y_ast, y_ast_histo_norm[ex_y_ast[:-1] >= y_ast])
-ax[1].fill_between(horizonal_values, 0, vertical_values, color=colors[2], alpha=0.3)
+ax[1].fill_between(horizonal_values, 0, vertical_values, color=colors[2], alpha=0.25)
 
 ax[1].plot(ex_y_hash[:-1], y_hash_histo_norm, color=colors[3], label=r"$f_{Y}(\tilde{y}|I',\tilde{y}=y^\#)$")
 ax[1].axvline(x=y_hash, ymax=1, color=colors[3], ls='--', label=r"$y^\#$")
 horizonal_value_at_y_ast = np.interp(y_ast, ex_y_hash[:-1], y_hash_histo_norm)
 horizonal_values = np.append(ex_y_hash[:-1][ex_y_hash[:-1] <= y_ast], y_ast)
 vertical_values = np.append(y_hash_histo_norm[ex_y_hash[:-1] <= y_ast], horizonal_value_at_y_ast)
-ax[1].fill_between(horizonal_values, 0, vertical_values, color=colors[3], alpha=0.3)
+ax[1].fill_between(horizonal_values, 0, vertical_values, color=colors[3], alpha=0.25)
+
+ax[1].text(0.28, 0.16, r"$\beta$", transform=ax[1].transAxes, va="bottom", size=8)
+ax[1].annotate("", xy=(0.33, 0.05), xytext=(.30, 0.17), xycoords="axes fraction", arrowprops=dict(arrowstyle="->"))
+ax[1].text(0.39, 0.16, r"$\alpha$", transform=ax[1].transAxes, va="bottom", size=8)
+ax[1].annotate("", xy=(0.37, 0.05), xytext=(.40, 0.17), xycoords="axes fraction", arrowprops=dict(arrowstyle="->"))
 
 ax[1].set_xlabel(r"$\tilde{y}$", size=8)
 ax[0].set_ylabel(r"$f_Y(\tilde{y})$", size=8)
 ax[1].set_ylabel(r"$f_Y(\tilde{y})$", size=8)
 
-
-ax[0].legend(frameon=False, fontsize=8)
-ax[1].legend(frameon=False, fontsize=8)
+ax[0].legend(frameon=False, fontsize=8, handlelength=1.8)
+ax[1].legend(frameon=False, fontsize=8, handlelength=1.8)
 ax[0].set_yticks([0])
 ax[0].set_yticklabels([0])
 ax[1].set_yticks([0])
