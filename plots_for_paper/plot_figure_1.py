@@ -142,6 +142,8 @@ ax[1].set_yticks([0])
 ax[1].set_yticklabels([0])
 ax[1].set_xticks([0])
 ax[1].set_xticklabels([0])
+ax[0].tick_params(axis='both', labelsize=8)
+ax[1].tick_params(axis='both', labelsize=8)
 ax[0].grid()
 ax[1].grid()
 
